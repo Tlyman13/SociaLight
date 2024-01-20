@@ -26,6 +26,7 @@ import 'common/locator.dart';
 import 'common/sidebar.dart';
 import 'notification/notificationPage.dart';
 import 'search/SearchPage.dart';
+import 'activity/ActivityPage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -200,6 +201,8 @@ class _HomePageState extends State<HomePage> {
         return NotificationPage(scaffoldKey: _scaffoldKey);
       case 3:
         return ChatListPage(scaffoldKey: _scaffoldKey);
+      case 4:
+        return ActivityPage(scaffoldKey: _scaffoldKey);
       default:
         return FeedPage(scaffoldKey: _scaffoldKey);
     }
@@ -210,10 +213,10 @@ class _HomePageState extends State<HomePage> {
     final state = context.watch<AuthState>();
     context.read<SuggestionsState>().initUser(state.userModel);
 
-    if (context
-        .select<SuggestionsState, bool>((state) => state.displaySuggestions)) {
-      return SuggestedUsers();
-    }
+    // if (context
+    //     .select<SuggestionsState, bool>((state) => state.displaySuggestions)) {
+    //   return SuggestedUsers();
+    // }
 
     return Scaffold(
       key: _scaffoldKey,
@@ -222,6 +225,7 @@ class _HomePageState extends State<HomePage> {
       body: _body(),
     );
   }
+
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

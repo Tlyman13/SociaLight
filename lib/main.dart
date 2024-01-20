@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter_twitter_clone/state/searchState.dart';
+import 'package:flutter_twitter_clone/state/activityState.dart';
 import 'package:flutter_twitter_clone/ui/page/common/locator.dart';
 import 'package:flutter_twitter_clone/ui/theme/theme.dart';
 
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<FeedState>(create: (_) => FeedState()),
         ChangeNotifierProvider<ChatState>(create: (_) => ChatState()),
         ChangeNotifierProvider<SearchState>(create: (_) => SearchState()),
+        ChangeNotifierProvider<ActivityState>(create: (_) => ActivityState()),
         ChangeNotifierProvider<NotificationState>(
             create: (_) => NotificationState()),
         ChangeNotifierProvider<SuggestionsState>(
