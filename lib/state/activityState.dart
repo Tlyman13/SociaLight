@@ -5,8 +5,6 @@ import 'package:flutter_twitter_clone/model/activity.dart';
 import 'appState.dart';
 
 class ActivityState extends AppState {
-  bool isBusy = false;
-  SortUser sortBy = SortUser.MaxFollower;
   // List<UserModel>? _userFilterList;
   // List<UserModel>? _userlist;
 
