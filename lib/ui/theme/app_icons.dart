@@ -9,6 +9,8 @@ class AppIcon {
   static const IconData messageFill = IconData(0xf554, fontFamily: _kFontFam);
   static const IconData search = IconData(0xf058, fontFamily: _kFontFam);
   static const IconData searchFill = IconData(0xf558, fontFamily: _kFontFam);
+  static const IconData newHangout = IconData(0xf057, fontFamily: _kFontFam);
+  static const IconData newHangoutFill = IconData(0xf057, fontFamily: _kFontFam);
   static const IconData notification = IconData(0xf055, fontFamily: _kFontFam);
   static const IconData notificationFill =
       IconData(0xf019, fontFamily: _kFontFam);

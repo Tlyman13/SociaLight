@@ -42,19 +42,21 @@ class _BottomMenubarState extends State<BottomMenubar> {
           _icon(null, 1,
               icon: 1 == state.pageIndex ? AppIcon.searchFill : AppIcon.search,
               isCustomIcon: true),
-          _icon(null, 2,
+          _centerIcon(null, 2,
               icon: 2 == state.pageIndex
-                  ? AppIcon.notificationFill
-                  : AppIcon.notification,
+                  ? AppIcon.newHangoutFill
+                  : AppIcon.newHangout,
               isCustomIcon: true),
           _icon(null, 3,
               icon: 3 == state.pageIndex
+                  ? AppIcon.notificationFill
+                  : AppIcon.notification,
+              isCustomIcon: true),
+          _icon(null, 4,
+              icon: 4 == state.pageIndex
                   ? AppIcon.messageFill
                   : AppIcon.messageEmpty,
               isCustomIcon: true),
-          _icon(null, 4,
-              icon: 4 == state.pageIndex ? AppIcon.searchFill : AppIcon.search,
-              isCustomIcon: true),   
         ],
       ),
     );
@@ -82,33 +84,86 @@ class _BottomMenubarState extends State<BottomMenubar> {
             duration: const Duration(milliseconds: ANIM_DURATION),
             opacity: ALPHA_ON,
             child: IconButton(
-              highlightColor: Colors.transparent,
-              splashColor: Colors.transparent,
-              padding: const EdgeInsets.all(0),
-              alignment: const Alignment(0, 0),
-              icon: isCustomIcon
-                  ? customIcon(context,
-                      icon: icon!,
-                      size: 22,
-                      isTwitterIcon: true,
-                      isEnable: index == state.pageIndex)
-                  : Icon(
-                      iconData,
-                      color: index == state.pageIndex
-                          ? Theme.of(context).primaryColor
-                          : Theme.of(context).textTheme.bodySmall!.color,
-                    ),
-              onPressed: () {
-                setState(() {
-                  state.setPageIndex = index;
-                });
-              },
-            ),
+                    highlightColor: Colors.transparent,
+                    splashColor: Colors.transparent,
+                    padding: const EdgeInsets.all(0),
+                    alignment: const Alignment(0, 0),
+                    icon: isCustomIcon
+                        ? customIcon(
+                            context,
+                            icon: icon!,
+                            size: 22,
+                            isTwitterIcon: true,
+                            isEnable: index == state.pageIndex,
+                          )
+                        : Icon(
+                            iconData,
+                            color: index == state.pageIndex
+                                ? Theme.of(context).primaryColor
+                                : Theme.of(context).textTheme.bodySmall!.color,
+                          ),
+                    onPressed: () {
+                      setState(() {
+                        state.setPageIndex = index;
+                      });
+                    },
+                  ),
           ),
         ),
       ),
     );
   }
+
+
+  Widget _centerIcon(IconData? iconData, int index,
+      {bool isCustomIcon = false, IconData? icon}) {
+    if (isCustomIcon) {
+      assert(icon != null);
+    } else {
+      assert(iconData != null);
+    }
+    var state = Provider.of<AppState>(
+      context,
+    );
+    return Expanded(
+      child: SizedBox(
+        height: double.infinity,
+        width: double.infinity,
+        child: AnimatedAlign(
+          duration: const Duration(milliseconds: ANIM_DURATION),
+          curve: Curves.easeIn,
+          alignment: const Alignment(0, ICON_ON),
+          child: AnimatedOpacity(
+            duration: const Duration(milliseconds: ANIM_DURATION),
+            opacity: ALPHA_ON,
+            child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: index == state.pageIndex ? Colors.lightBlue: Colors.blue,
+                      foregroundColor: Colors.white,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        state.setPageIndex = index;
+                      });
+                    },
+                    child: Transform.translate(
+                      offset: Offset(0, -5),
+                      child: customIcon(
+                              context,
+                              icon: icon!,
+                              size: 35,
+                              isTwitterIcon: true,
+                              isEnable: false,
+                              iconColor: Colors.white
+                            ),
+                    )
+                  )
+          ),
+        ),
+      ),
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
